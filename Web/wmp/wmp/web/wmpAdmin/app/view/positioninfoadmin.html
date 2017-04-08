@@ -1,0 +1,55 @@
+<div ng-controller="positioninfoController">
+ <div class="row">
+     <div class="col-lg-6 col-md-6" >
+                <!-- /.panel -->
+                    <div class="panel panel-default" style="height: 600px;overflow-y:scroll;">
+                        <div class="panel-heading">
+                            <i class="fa fa-clock-o fa-fw"></i>Timeline
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="timeline">
+                                <li ng-repeat="x in timeline" ng-class="x.id %2 != 0 ? 'timeline-inverted' : ''">
+                                    <div class="timeline-badge"><i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 class="timeline-title">{{x.latitude}},{{x.longitude}}</h4>
+                                            <p><small class="text-muted"><i class="fa fa-clock-o"></i>{{x.date}}</small>
+                                            </p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p>Accuracy: {{x.accuracy}}</p>
+                                            <p>Model: {{x.phoneInfo.modelo}}</p>
+                                            <p>Name: {{x.phoneName.desc}}</p>
+                                            <hr>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="fa fa-gear"></i>  <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">View on Map</a>
+                                                    </li>
+                                                    <li><a ng-click="deletePoint(x.id,x.phoneInfo.id)">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+        </div>
+     
+     <div class="col-lg-6 col-md-6"> 
+         <leaflet center="center" markers="markers" paths="paths" layers="layers" event-broadcast="events" width="100%" height="600px"></leaflet>
+           <!-- <a ng-click='moveMarker(0,43.434343,65.65656,"prueba")'>move marker</a>-->
+     </div>
+ </div>
+
+    <div id="grid" style="width:100%; height:30px;" ui-grid="gridOptions"></div>
+
+</div>

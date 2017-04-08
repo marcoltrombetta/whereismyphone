@@ -1,0 +1,14 @@
+<div ng-controller="gpxAdminController">
+<form method="POST" action="../../../Gpx/FileUpload" enctype="multipart/form-data" >
+    File:
+    <input type="file" name="file" id="file" /> <br/>
+    
+            <input type="hidden" value="" name="destination"/>
+    Phone:
+     <select name="idphone">
+        <option ng-repeat="item in filter.phones" value="{{item.phoneInfo.imei}}">{{item.desc}}</option>
+      </select>
+    </br>
+    <input type="submit" value="Upload" name="upload" id="upload" />
+</form>
+</div>

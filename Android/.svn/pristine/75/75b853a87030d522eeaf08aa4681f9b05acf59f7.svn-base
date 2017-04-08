@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/marco/ownCloud/whereismyphone/Android/wmp/app/build/intermediates/exploded-aar/org.osmdroid/osmdroid-android/5.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a8bbd365ad0844126f3c3714700fbd888b36cfda">
+        <dex dex="/home/marco/ownCloud/whereismyphone/Android/wmp/app/build/intermediates/pre-dexed/release/org.osmdroid-osmdroid-android-5.1_50da785727e1b97ebdb7b4d569db58f085811ef0.jar" />
+    </item>
+
+</items>

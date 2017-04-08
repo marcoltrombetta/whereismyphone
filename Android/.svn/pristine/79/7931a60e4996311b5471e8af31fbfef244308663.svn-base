@@ -1,0 +1,8 @@
+package phone.gps.webservice;
+
+/**
+ * Created by marco on 3/9/16.
+ */
+public class Authentication {
+
+}

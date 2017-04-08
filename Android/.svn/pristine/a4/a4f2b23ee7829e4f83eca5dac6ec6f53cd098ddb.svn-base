@@ -1,0 +1,77 @@
+package phone.gps.fragments;
+
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
+import phone.gps.R;
+import phone.gps.obj.Globals;
+
+/**
+ * Created by marco on 3/19/16.
+ */
+
+//https://github.com/osmdroid/osmdroid/wiki/How-to-use-the-osmdroid-library
+
+public class MapFragment extends Fragment {
+
+    public MapFragment() {
+    }
+
+    public static MapFragment newInstance() {
+        MapFragment fragment = new MapFragment();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_map, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        MapView map = (MapView) view.findViewById(R.id.map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+
+        IMapController mapController = map.getController();
+        mapController.setZoom(9);
+
+        Location location= null;
+
+        try {
+            location = Globals.getLocation(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(location!=null) {
+            GeoPoint startPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+            mapController.setCenter(startPoint);
+        }
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void doLogin(){
+     //   User user=new User(email.getText().toString(),password.getText().toString());
+      //  new Thread(new LoginRunnable(user,Globals.getImei(getActivity().getApplicationContext()),loginInterface)).start();
+    }
+}

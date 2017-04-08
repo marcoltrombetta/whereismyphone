@@ -1,0 +1,4 @@
+<div ng-controller="phoneinfoAdminController">
+    <div id="grid" style="width:100%; height:30px;" ui-grid="gridOptions"></div>
+</div>
+

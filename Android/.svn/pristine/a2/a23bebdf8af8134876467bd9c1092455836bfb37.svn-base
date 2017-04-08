@@ -1,0 +1,28 @@
+package phone.gps.runnable;
+
+/**
+ * Created by marco on 3/10/16.
+ */
+public class LoginRunnable implements Runnable {
+    public static interface LoginInterface{
+        void onComplete();
+        void onError(Exception ex);
+    }
+
+    private LoginInterface loginInterface;
+
+    public LoginRunnable(LoginInterface loginInterface){
+        this.loginInterface=loginInterface;
+    }
+
+    @Override
+    public void run() {
+        try{
+
+        }catch (Exception ex){
+            loginInterface.onError(ex);
+        }
+
+        loginInterface.onComplete();
+    }
+}

@@ -1,0 +1,37 @@
+package phone.gps.runnable;
+
+import android.content.Context;
+
+import phone.gps.preferences.Authentication;
+
+/**
+ * Created by marco on 3/9/16.
+ */
+
+public class ActionRunnable implements Runnable {
+    public static interface ActionInterface{
+        void onComplete();
+        void onError(Exception ex);
+    }
+
+    private Authentication auth;
+    private ActionInterface actionInterface;
+
+    public ActionRunnable(ActionInterface actionInterface, Context ctx){
+        this.actionInterface=actionInterface;
+        auth=new Authentication(ctx);
+    }
+
+    @Override
+    public void run() {
+        try {
+            if(auth.isLogged()){
+                //update user location to server
+            }
+        }catch (Exception ex){
+            actionInterface.onError(ex);
+        }
+
+        actionInterface.onComplete();
+    }
+}

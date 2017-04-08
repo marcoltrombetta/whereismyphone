@@ -1,0 +1,44 @@
+package phone.gps.webservice;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import phone.gps.obj.AuthenticationRequest;
+import phone.gps.obj.Globals;
+import phone.gps.obj.User;
+
+public class AuthenticationService {
+	private Post post;
+	
+	public AuthenticationService(){
+		post=new Post();
+	}
+
+	public AuthenticationRequest doLogin(User user) throws JSONException{
+		AuthenticationRequest auth=new AuthenticationRequest();
+
+	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	    nameValuePairs.add(new BasicNameValuePair("Email", user.getEmail()));
+	    nameValuePairs.add(new BasicNameValuePair("Password", Globals.md5(user.getPassword())));
+
+	    String json=post.doSSLPost(Globals.ServerUrl+"/LoginController",nameValuePairs);
+	    
+		return getRequest(json.toString());
+	}
+
+	private AuthenticationRequest getRequest(String request) throws JSONException{
+
+		AuthenticationRequest authReq=new AuthenticationRequest();
+		JSONObject jObject = new JSONObject(request);
+		JSONObject jObj = jObject.getJSONObject("data");
+
+		authReq.setToken(jObj.getString("Token"));
+
+		return authReq;
+	}
+
+}

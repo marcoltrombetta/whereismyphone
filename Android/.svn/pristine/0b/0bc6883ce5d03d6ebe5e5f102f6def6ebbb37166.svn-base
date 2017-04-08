@@ -1,0 +1,45 @@
+package phone.gps.runnable;
+
+import android.content.Context;
+import android.location.Location;
+import android.os.Handler;
+
+import phone.gps.obj.Globals;
+import phone.gps.preferences.Authentication;
+
+/**
+ * Created by marco on 3/9/16.
+ */
+
+public class LocationServiceRunnable implements Runnable {
+    public static interface LocationServiceInterface{
+        void onComplete();
+        void onError(Exception ex);
+    }
+
+    private LocationServiceInterface locationServiceInterface;
+    private Authentication auth;
+    private Context ctx;
+
+    public LocationServiceRunnable(LocationServiceInterface locationServiceInterface, Context ctx){
+        this.locationServiceInterface=locationServiceInterface;
+        auth=new Authentication(ctx);
+        this.ctx=ctx;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Location location = Globals.getLocation(ctx); //get current location
+
+            if(auth.isLogged()) {
+                //update user location to server
+            }
+
+        }catch (Exception ex){
+            locationServiceInterface.onError(ex);
+        }
+
+        locationServiceInterface.onComplete();
+    }
+}

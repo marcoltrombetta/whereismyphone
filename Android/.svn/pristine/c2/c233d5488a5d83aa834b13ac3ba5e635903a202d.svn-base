@@ -1,0 +1,66 @@
+package phone.gps.fragments;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
+
+import phone.gps.R;
+import phone.gps.obj.PhoneInfo;
+import phone.gps.runnable.PhoneInfoRunnable;
+
+public class DevicesFragment extends ListFragment {
+
+    PhoneInfoRunnable.PhoneInfoInterface phoneInfoInterface=new PhoneInfoRunnable.PhoneInfoInterface() {
+        @Override
+        public void onComplete(List<PhoneInfo> phoi) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    fillListData();
+                }
+            });
+        }
+
+        @Override
+        public void onError(Exception ex) {
+
+        }
+    };
+
+    public DevicesFragment() {
+    }
+
+    private void fillListData(){
+
+    }
+
+    public static DevicesFragment newInstance() {
+        DevicesFragment fragment = new DevicesFragment();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        startSync();
+        return inflater.inflate(R.layout.fragment_devices, container, false);
+    }
+
+    private void startSync(){
+        new Thread(new PhoneInfoRunnable(phoneInfoInterface, getActivity())).start();
+    }
+}

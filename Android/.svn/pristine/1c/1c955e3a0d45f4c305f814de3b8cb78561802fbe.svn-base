@@ -1,0 +1,48 @@
+package phone.gps.webservice;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import com.miamor.Obj.Category;
+import com.miamor.Obj.Globals;
+
+public class CategoryService {
+	private Post post;
+	
+	public CategoryService(){
+		post=new Post();
+	}
+	
+	public Collection<Category> getCategoryById(int CategoryId, int pageNum) throws JSONException{
+	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+	    nameValuePairs.add(new BasicNameValuePair("AppSecret", Globals.AppSecret));
+	    nameValuePairs.add(new BasicNameValuePair("categoryid", Integer.toString(CategoryId)));
+	    nameValuePairs.add(new BasicNameValuePair("pageid", Integer.toString(pageNum)));
+
+	    String json=post.doPost("http://misamores.net/Vendorcategory/MApp_GetCategoriesByID",nameValuePairs);
+	    
+		return getRequest(json.toString());
+	}
+	
+	private Collection<Category> getRequest(String request) throws JSONException{
+		
+		Collection<Category> cat=new ArrayList<Category>();
+		JSONArray jArr = new JSONArray(request);
+	
+		for(int i=0;i<jArr.length();i++){
+            JSONObject json_data = jArr.getJSONObject(i);
+            Category category=new Category();
+            category.setId(Integer.parseInt(json_data.getString("Id")));
+    		category.setDescription(json_data.getString("Description"));
+    		category.setName(json_data.getString("Name"));
+    		cat.add(category);
+		}
+		
+		return cat;
+	}
+}

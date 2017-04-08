@@ -1,0 +1,23 @@
+<div ng-controller="positionHistoryController">
+    <input ui-date ng-model="filter.dateFrom" id="dateFrom" >
+    <input ui-date ng-model="filter.dateTo" id="dateTo" >
+    <select name="idphone" id="phone" ng-model="filter.idphone">
+        <option ng-repeat="item in filter.phones" ng-value="item.id">{{item.imei}}</option>
+      </select>
+    
+    <button type="button" ng-click="filterClick()" class="btn btn-lg btn-success btn-block">Filter</button>
+        
+    <leaflet center="center" markers="markers" paths="paths" layers="layers" event-broadcast="events" width="100%" height="600px"></leaflet>
+   <!-- <a ng-click='moveMarker(0,43.434343,65.65656,"prueba")'>move marker</a>-->
+
+   <p>Current page: {{ gridApi.pagination.getPage() }} of {{ gridApi.pagination.getTotalPages() }}</p>
+      <button type="button" class="btn btn-success" ng-click="gridApi.pagination.previousPage()">
+         previous page
+       </button>
+ 
+      <button type="button" class="btn btn-success" ng-click="gridApi.pagination.nextPage()">
+         next page
+       </button>
+   <div id="grid" ui-grid="gridOptions" ui-grid-pagination style="width:100%; height:30px;"> </div>
+     
+</div>

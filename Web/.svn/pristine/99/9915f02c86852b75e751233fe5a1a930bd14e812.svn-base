@@ -1,0 +1,6 @@
+<div ng-controller="positionHistoryController">
+    <leaflet center="center" markers="markers" paths="paths" layers="layers" event-broadcast="events" width="100%" height="600px"></leaflet>
+   <!-- <a ng-click='moveMarker(0,43.434343,65.65656,"prueba")'>move marker</a>-->
+    
+    <div id="grid" style="width:100%; height:30px;" ui-grid="gridOptions"></div>
+</div>
