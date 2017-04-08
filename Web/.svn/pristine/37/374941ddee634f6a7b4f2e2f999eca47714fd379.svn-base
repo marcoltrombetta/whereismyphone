@@ -1,8 +1,0 @@
-<div ng-controller="phonenamesAdminController">
-    <div id="grid" style="width:100%; height:30px;" ui-grid="gridOptions"></div>
-    
-    
-     <div ng-include src="'phonenames/newphonename.html'"></div>
-
-</div>
-

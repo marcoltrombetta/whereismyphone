@@ -1,8 +1,0 @@
-<div ng-controller="planAdminController">
-    
-    <button type="button" class="btn btn-default btn-success" data-toggle="modal" data-target="#myModal">New</button>
-    
-    <div id="grid" style="width:100%; height:30px;" ui-grid="gridOptions"></div>
-        
-    <div ng-include src="'plan/newplan.html'"></div>
-</div>
